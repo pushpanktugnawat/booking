@@ -6,13 +6,7 @@
 
 **Preamble**
      
-Your mission would you decide to accept it:
 
-As part of the multi-disciplinary development elite team **PIT** in Statista you are creating software to alleviate the 
-issues from our Sales team. For this, a new requirement has been raised to implement a RESTful web service that stores 
-_booking_ objects in memory and return information about them.
-
-Note: A _booking_ is a request from any of our beloved customers to acquire one of our products. 
 
 **Challenge**
 
