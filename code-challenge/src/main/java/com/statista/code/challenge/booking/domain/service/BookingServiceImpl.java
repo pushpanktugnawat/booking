@@ -5,6 +5,7 @@ import com.statista.code.challenge.booking.domain.model.Booking;
 import com.statista.code.challenge.booking.port.inbound.BookingService;
 import com.statista.code.challenge.booking.port.outbound.BookingRepository;
 import com.statista.code.challenge.booking.exception.BookingNotFoundException;
+import com.statista.code.challenge.email.inbound.EmailService;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -12,6 +13,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +28,7 @@ public class BookingServiceImpl implements BookingService {
     private final BookingRepository bookingRepository;
     private Map<String, Set<Booking>> bookings = new HashMap<>();
     private final DepartmentFactory departmentFactory;
+    private final EmailService emailService;
 
     @Override
     public Booking createBooking(Booking booking) {
@@ -35,6 +38,7 @@ public class BookingServiceImpl implements BookingService {
         var value = bookings.getOrDefault(booking.getDepartment(), new HashSet<>());
         value.add(booking);
         bookings.put(booking.getDepartment(), value);
+        CompletableFuture.runAsync(() -> emailService.sendEmail());
         return bookingRepository.save(booking);
     }
 

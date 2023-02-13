@@ -8,6 +8,7 @@ import static org.mockito.Mockito.when;
 import com.statista.code.challenge.booking.domain.factory.DepartmentFactory;
 import com.statista.code.challenge.booking.domain.model.Booking;
 import com.statista.code.challenge.booking.port.outbound.BookingRepository;
+import com.statista.code.challenge.email.inbound.EmailService;
 import java.util.Map;
 import java.util.Set;
 import org.junit.jupiter.api.Assertions;
@@ -29,6 +30,9 @@ class BookingServiceImplTest {
 
     @Mock
     private DepartmentFactory departmentFactory;
+
+    @Mock
+    private EmailService emailService;
 
 
     @Test
