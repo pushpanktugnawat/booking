@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
-public class MarketingDepartment implements DepartmentDoBusiness<String>{
+public class MarketingDepartment implements DepartmentDoBusiness<String> {
 
     @Override
     public String getDepartment() {

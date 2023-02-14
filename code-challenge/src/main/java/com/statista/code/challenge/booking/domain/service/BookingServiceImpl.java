@@ -2,9 +2,9 @@ package com.statista.code.challenge.booking.domain.service;
 
 import com.statista.code.challenge.booking.domain.factory.DepartmentFactory;
 import com.statista.code.challenge.booking.domain.model.Booking;
+import com.statista.code.challenge.booking.exception.BookingNotFoundException;
 import com.statista.code.challenge.booking.port.inbound.BookingService;
 import com.statista.code.challenge.booking.port.outbound.BookingRepository;
-import com.statista.code.challenge.booking.exception.BookingNotFoundException;
 import com.statista.code.challenge.email.inbound.EmailService;
 import java.util.Collection;
 import java.util.HashMap;
@@ -26,9 +26,9 @@ import org.springframework.stereotype.Service;
 public class BookingServiceImpl implements BookingService {
 
     private final BookingRepository bookingRepository;
-    private Map<String, Set<Booking>> bookings = new HashMap<>();
     private final DepartmentFactory departmentFactory;
     private final EmailService emailService;
+    private final Map<String, Set<Booking>> bookings = new HashMap<>();
 
     @Override
     public Booking createBooking(Booking booking) {
@@ -93,7 +93,7 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public String doBusiness(String bookingId) throws Exception {
         var booking = findById(bookingId);
-        if(Objects.nonNull(booking)) {
+        if (Objects.nonNull(booking)) {
             var departmentService = departmentFactory.execute(booking.getDepartment());
             return (String) departmentService.doBusiness();
         }

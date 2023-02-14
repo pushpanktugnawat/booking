@@ -1,6 +1,5 @@
 package com.statista.code.challenge.booking.domain.model;
 
-import lombok.Builder;
 import lombok.Data;
 
 @Data
